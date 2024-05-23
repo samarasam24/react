@@ -1,0 +1,1 @@
+export const MockApi = 'https://65b1d9849bfb12f6eafc3b4b.mockapi.io/Vehicle-Registration';
