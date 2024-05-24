@@ -1,12 +1,15 @@
+import { Provider } from 'react-redux';
 import './App.css';
 import { CrudForm } from './components/CrudForm';
+import { store } from './store/Store';
+
 
 
 function App() {
   return (
-    <>
-      <CrudForm/>
-    </>
+   <Provider store={store}>
+     <CrudForm/>
+   </Provider>       
   );
 }
 
