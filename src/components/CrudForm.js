@@ -33,8 +33,10 @@ export const CrudForm = () => {
    };
    
     return( 
-        <form 
-        className='crudForm d-flex flex-column justify-content-center align-items-center'
+        <div className='d-flex flex-column justify-content-center align-items-center'>
+         <h1>Register </h1>
+         <form 
+        className='crudForm d-flex  flex-column justify-content-center align-items-center'
         onSubmit={handleSubmit}>
            <div>
               <label>Name:</label>
@@ -56,5 +58,6 @@ export const CrudForm = () => {
               <button className='btn btn-primary mt-2'>Submit</button>
            </div>
         </form>
+        </div>
     );
 };
