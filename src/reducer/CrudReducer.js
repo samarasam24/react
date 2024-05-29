@@ -18,11 +18,17 @@ export  function CrudReducer( state = userData,action) {
 
         case FETCH_USER_SUCCESS:
 
-            return state;
+            return {
+                ...state,
+                payload:action.userInfo
+            };
 
         case FETCH_USER_FAILED:
 
-            return state;
+            return {
+                ...state,
+                payload:action.error
+            };
 
         case CREATE_USER_NAME:
             
@@ -40,8 +46,7 @@ export  function CrudReducer( state = userData,action) {
                 userPassword:action.payload 
             };
 
-        case SUBMIT_FORM:
-
+        case SUBMIT_FORM: 
             return {
                 ...state,
                 //updating the alluser with a usename and userpassword when submit action dispatched

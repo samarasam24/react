@@ -9,7 +9,10 @@ export const CrudForm = () => {
    // const selectName = (state) => state.userName;   //this  method is a another way of accessing values
    // const selectPassword = (state) => state.userPassword;
    const userName = useSelector(state => state.userName); //a selector allows to extract data form a redux-store
-   const userPassword = useSelector(state => state.userPassword);  
+   const userPassword = useSelector(state => state.userPassword); 
+   const all = useSelector( state => state);
+   
+   console.log(all);
 
    //action dispatch
    const dispatch = useDispatch();
@@ -22,7 +25,7 @@ export const CrudForm = () => {
 
       dispatch({type:name,payload:value}); //here i sending the values to the reducer in payload
 
-   };
+   }; 
 
    //form handler
    const handleSubmit = (e) => {
