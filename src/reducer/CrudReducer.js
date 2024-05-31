@@ -4,7 +4,8 @@ import { CREATE_USER_NAME, CREATE_USER_PASSWORD, FETCH_USER_FAILED, FETCH_USER_R
 const userData = {  
     allUser:[],
     userName:'',
-    userPassword:''
+    userPassword:'',
+    error:''
 };
 
 //reducer function
@@ -17,17 +18,18 @@ export  function CrudReducer( state = userData,action) {
             return state;
 
         case FETCH_USER_SUCCESS:
+            console.log(action.userInfo);
 
             return {
                 ...state,
-                payload:action.userInfo
+                allUser: action.userInfo,
             };
 
         case FETCH_USER_FAILED:
 
             return {
                 ...state,
-                payload:action.error
+                error:action.error
             };
 
         case CREATE_USER_NAME:
@@ -50,16 +52,14 @@ export  function CrudReducer( state = userData,action) {
             return {
                 ...state,
                 //updating the alluser with a usename and userpassword when submit action dispatched
-                allUser:[...state.allUser,  
-                    {
-                        userName:state.userName,
-                        userPassword:state.userPassword
-                    },
-                ],
+                allUser: [...state.allUser, {
+                    userName: state.userName,
+                    userPassword: state.userPassword,
+                }],
                 //here emptying the username and userpassword values 
                 //because it will show the values in the input field after form submitted 
-                userName:'',
-                userPassword:'' 
+                userName: '',
+                userPassword: '',
             };
 
         default:

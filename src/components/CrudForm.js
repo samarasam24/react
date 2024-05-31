@@ -9,11 +9,7 @@ export const CrudForm = () => {
    // const selectName = (state) => state.userName;   //this  method is a another way of accessing values
    // const selectPassword = (state) => state.userPassword;
    const userName = useSelector(state => state.userName); //a selector allows to extract data form a redux-store
-   const userPassword = useSelector(state => state.userPassword); 
-   const all = useSelector( state => state);
-   
-   console.log(all);
-
+   const userPassword = useSelector(state => state.userPassword);  
    //action dispatch
    const dispatch = useDispatch();
 
@@ -37,10 +33,10 @@ export const CrudForm = () => {
    
     return( 
         <div className='d-flex flex-column justify-content-center align-items-center'>
-         <h1>Register </h1>
-         <form 
-        className='crudForm d-flex  flex-column justify-content-center align-items-center'
+        <form 
+        className='crudForm d-flex flex-column justify-content-center align-items-center '
         onSubmit={handleSubmit}>
+          <h1>Register </h1>
            <div>
               <label>Name:</label>
               <br/>
@@ -60,7 +56,7 @@ export const CrudForm = () => {
            <div>
               <button className='btn btn-primary mt-2'>Submit</button>
            </div>
-        </form>
-        </div>
+        </form> 
+        </div> 
     );
 };
