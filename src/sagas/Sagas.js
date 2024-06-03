@@ -1,24 +1,39 @@
+import { call, put, takeEvery } from "redux-saga/effects";
+import { ADD_ITEM_REQUEST, FETCH_USER_REQUEST } from "../type/Type";
 import axios from "axios";
-import { MockApi } from '../apis/MockApi.js';
-import { call, put, takeLatest } from "redux-saga/effects";
-import { FETCH_USER_REQUEST,fetchDataSuccess } from "../action/CrudAction";
+import { MockApi } from "../apis/MockApi";
+import {   adduserFormSuccess, fetchUserSucces } from "../actionCreater/ActionCreator";
 
-function fetchApi() {
-    return axios.get(MockApi)
-    .then( res => res.data)
-    .catch( err => err)
+function fethcItems() {
+   return axios.get(MockApi)
+         .then( res =>  res.data)
+         .catch( err => err)
+}; 
+function integratedApi(action) {
+     console.log(action.payload);
+    return axios.post(MockApi,action.payload )
+    .then(res => res.data)
+}
+function* addItemAPi(action) {
+    try {
+        const data = yield call(integratedApi,action)
+        yield put(adduserFormSuccess(data));
+    } catch (error) {
+        
+    }
 };
 
-export function* WorkerFecth() {
-
+function* fetchData() {
     try {
-        const data = yield call(fetchApi)
-        yield put(fetchDataSuccess(data))
+        const users = yield call(fethcItems); 
+        yield put(fetchUserSucces(users));
     } catch (error) {
         console.error(error);
     }
 };
 
-export function* Watcherfecth(){
-    yield takeLatest(FETCH_USER_REQUEST,WorkerFecth);
+export function* watcherSaga() {
+
+    yield takeEvery(FETCH_USER_REQUEST,fetchData); 
+    yield takeEvery(ADD_ITEM_REQUEST,addItemAPi);
 };

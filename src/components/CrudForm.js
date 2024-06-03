@@ -1,47 +1,48 @@
-import { useDispatch, useSelector } from "react-redux";
-import { CREATE_USER_NAME, CREATE_USER_PASSWORD, fetchDataRequest } from "../action/CrudAction";
-import { useEffect } from "react";
+ import { useDispatch, useSelector  } from "react-redux"; 
+import { addUser, addUserForm } from "../actionCreater/ActionCreator";
+import { ADD_USERNAME, ADD_USERPASSWORD } from "../type/Type";
 
-export function CrudForm() {
-   
-   const  userName  = useSelector( state => state.userName );
-   const  userPassword = useSelector( state => state.userPassword );
-   const  id = useSelector( state => state.id );
+ 
+export function CrudForm() {  
+
    const dispatch = useDispatch();
+   const userName = useSelector( state => state.userName);  
+   const userPassword = useSelector( state => state.userPassword);
+
    const handleChange = (e) => {
-      const { name,value } = e.target;
-      dispatch( {type:name,payload:value} );
+      const {name,value} = e.target;
+      dispatch(addUser(name,value));
    };
-
-   useEffect( () => {
-      dispatch(fetchDataRequest());
-   },[dispatch])
-
-   console.log(id);
+   const handleSubmit = (e) => {
+      e.preventDefault();
+      dispatch(addUserForm({userName,userPassword}));
+   };
+   
    return(
       <>
       <section 
       className="d-flex justify-content-center align-items-center vh-100">
          <form 
          className="border border-2 border-secondary gap-2 d-flex 
-         flex-column p-5 rounded">
+         flex-column p-5 rounded"
+         onSubmit={handleSubmit}>
             <h1 className="text-center">Register</h1>
             <label>Name:</label>
-            <input 
-            name={CREATE_USER_NAME}
+            <input
+            name={ADD_USERNAME}
             value={userName}
-            className="rounded border shadow-none"
-            onChange={handleChange}/>
+            onChange={handleChange}  
+            className="rounded border shadow-none" />
             <label>Password:</label>
-            <input 
-            name={CREATE_USER_PASSWORD}
+            <input
             value={userPassword}
-            className="border rounded shadow-none"
-            onChange={handleChange}/>
+            name={ADD_USERPASSWORD}  
+            onChange={handleChange}
+            className="border rounded shadow-none"/>
             <button 
             className="align-self-end rounded border btn py-1 btn-primary">
                Submit</button>
-         </form>
+         </form> 
       </section>
       </>
    );

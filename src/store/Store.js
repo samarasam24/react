@@ -1,9 +1,16 @@
-import { applyMiddleware, createStore } from 'redux';
-import { CrudReducer } from '../reducer/CrudReducer.js';
-import createSagaMiddleware from '@redux-saga/core';
-import { Watcherfecth } from '../sagas/Sagas.js';
+import { applyMiddleware, legacy_createStore } from "redux";
+import { CrudReducer } from "../reducer/CrudReducer";
+import createSagaMiddleware from 'redux-saga';
+import { watcherSaga } from "../sagas/Sagas";
 
-const sagaMiddelWare = createSagaMiddleware();
+const sagaMiddleWare = createSagaMiddleware();
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__;
 
-export const store = createStore(CrudReducer,applyMiddleware(sagaMiddelWare));
-sagaMiddelWare.run(Watcherfecth)
+export const store = legacy_createStore(    
+    CrudReducer,
+    composeEnhancers(
+        applyMiddleware(sagaMiddleWare)
+    )
+);
+
+sagaMiddleWare.run(watcherSaga);

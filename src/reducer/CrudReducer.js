@@ -1,30 +1,49 @@
-import { CREATE_USER_NAME,CREATE_USER_PASSWORD, FETCH_USER_SUCCESS } from '../action/CrudAction.js'
-const initialValue = {
+import { ADD_ITEM_REQUEST, ADD_ITEM_SUCCESS, ADD_USERNAME, ADD_USERPASSWORD, FETCH_USER_FAILED, FETCH_USER_REQUEST, FETCH_USER_SUCCESS } from "../type/Type";
+
+ const initialValue = {
+    allUser:[],
     userName:'',
-    userPassword:'',
-    error:'',
-    id:[],
-    allUser:[]
-};
-export function CrudReducer( state = initialValue,action ) {
+    userPassword:''
+ };
+
+export const CrudReducer = ( state=initialValue,action ) => {
+
     switch(action.type){
-        case CREATE_USER_NAME:
+        case FETCH_USER_REQUEST:
+            return {
+                ...state
+            };
+        case FETCH_USER_SUCCESS: 
+            return {
+                ...state,
+               allUser:action.payload
+            };
+        case FETCH_USER_FAILED:
+            return {
+                ...state
+            };
+        case ADD_USERNAME:
             return {
                 ...state,
                 userName:action.payload
             };
-        case CREATE_USER_PASSWORD:
+        case ADD_USERPASSWORD:
             return {
                 ...state,
                 userPassword:action.payload
             };
-        case FETCH_USER_SUCCESS:
-            console.log(action.payload);
+        case ADD_ITEM_REQUEST:
             return {
                 ...state,
-                id:action.payload
+            };
+        case ADD_ITEM_SUCCESS:
+            return {
+                ...state,
+                allUser:[...state.allUser,action.payload]
             }
         default:
-            return state;
+            return {
+                ...state
+            };
     };
-};
+ };
