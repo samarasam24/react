@@ -1,62 +1,48 @@
-import { useDispatch, useSelector } from 'react-redux';
-import '../styles/CrudForm.css'; 
-import { SUBMIT_FORM } from '../action/CrudAction';
+import { useDispatch, useSelector } from "react-redux";
+import { CREATE_USER_NAME, CREATE_USER_PASSWORD, fetchDataRequest } from "../action/CrudAction";
+import { useEffect } from "react";
 
-export const CrudForm = () => {  
-
-   //global state access
-
-   // const selectName = (state) => state.userName;   //this  method is a another way of accessing values
-   // const selectPassword = (state) => state.userPassword;
-   const userName = useSelector(state => state.userName); //a selector allows to extract data form a redux-store
-   const userPassword = useSelector(state => state.userPassword);  
-   //action dispatch
-   const dispatch = useDispatch();
-
-   //input handler
-   const handleChange = (e) => {
-
-      //this was destructuring the e.target object values, name and value
-      const { name,value } = e.target;
-
-      dispatch({type:name,payload:value}); //here i sending the values to the reducer in payload
-
-   }; 
-
-   //form handler
-   const handleSubmit = (e) => {
-
-      e.preventDefault();
-
-      dispatch({type:SUBMIT_FORM}); 
-   };
+export function CrudForm() {
    
-    return( 
-        <div className='d-flex flex-column justify-content-center align-items-center'>
-        <form 
-        className='crudForm d-flex flex-column justify-content-center align-items-center '
-        onSubmit={handleSubmit}>
-          <h1>Register </h1>
-           <div>
-              <label>Name:</label>
-              <br/>
-              <input 
-              className='rounded border' 
-              name='CREATE_USER_NAME' 
-              value={userName} onChange={handleChange}/> 
-           </div>
-           <div>
-              <label>Password:</label>
-              <br/>
-              <input 
-              className='rounded border' 
-              name='CREATE_USER_PASSWORD' 
-              value={userPassword} onChange={handleChange}/>
-           </div>
-           <div>
-              <button className='btn btn-primary mt-2'>Submit</button>
-           </div>
-        </form> 
-        </div> 
-    );
+   const  userName  = useSelector( state => state.userName );
+   const  userPassword = useSelector( state => state.userPassword );
+   const  id = useSelector( state => state.id );
+   const dispatch = useDispatch();
+   const handleChange = (e) => {
+      const { name,value } = e.target;
+      dispatch( {type:name,payload:value} );
+   };
+
+   useEffect( () => {
+      dispatch(fetchDataRequest());
+   },[dispatch])
+
+   console.log(id);
+   return(
+      <>
+      <section 
+      className="d-flex justify-content-center align-items-center vh-100">
+         <form 
+         className="border border-2 border-secondary gap-2 d-flex 
+         flex-column p-5 rounded">
+            <h1 className="text-center">Register</h1>
+            <label>Name:</label>
+            <input 
+            name={CREATE_USER_NAME}
+            value={userName}
+            className="rounded border shadow-none"
+            onChange={handleChange}/>
+            <label>Password:</label>
+            <input 
+            name={CREATE_USER_PASSWORD}
+            value={userPassword}
+            className="border rounded shadow-none"
+            onChange={handleChange}/>
+            <button 
+            className="align-self-end rounded border btn py-1 btn-primary">
+               Submit</button>
+         </form>
+      </section>
+      </>
+   );
 };

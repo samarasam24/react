@@ -1,27 +1,24 @@
 import axios from "axios";
-import {MockApi} from '../apis/MockApi.js'
+import { MockApi } from '../apis/MockApi.js';
 import { call, put, takeLatest } from "redux-saga/effects";
-import { FETCH_USER_FAILED, FETCH_USER_REQUEST, FETCH_USER_SUCCESS } from "../action/CrudAction";
+import { FETCH_USER_REQUEST,fetchDataSuccess } from "../action/CrudAction";
 
-function userFetch() {
-   return axios.get(MockApi)
-    .then( res => {
-        console.log(res.data);
-        return res.data })
-    .catch( err => { console.error(err);})
-    
+function fetchApi() {
+    return axios.get(MockApi)
+    .then( res => res.data)
+    .catch( err => err)
 };
 
-function* getUsersFetch() {
+export function* WorkerFecth() {
+
     try {
-        const userInfo = yield call(userFetch);
-        yield put( { type:FETCH_USER_SUCCESS,userInfo } );
-    } catch ( error ) {
-        yield put( { type:FETCH_USER_FAILED,error } );
+        const data = yield call(fetchApi)
+        yield put(fetchDataSuccess(data))
+    } catch (error) {
+        console.error(error);
     }
 };
 
-export function* mySaga() {
-    yield takeLatest(FETCH_USER_REQUEST, getUsersFetch);
-}
-
+export function* Watcherfecth(){
+    yield takeLatest(FETCH_USER_REQUEST,WorkerFecth);
+};

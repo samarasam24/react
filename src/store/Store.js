@@ -1,10 +1,9 @@
-import { CrudReducer } from "../reducer/CrudReducer";
-import { configureStore } from "@reduxjs/toolkit";
+import { applyMiddleware, createStore } from 'redux';
+import { CrudReducer } from '../reducer/CrudReducer.js';
 import createSagaMiddleware from '@redux-saga/core';
-import { mySaga } from "../sagas/Sagas";
+import { Watcherfecth } from '../sagas/Sagas.js';
 
-const sagaMiddleware = createSagaMiddleware();
+const sagaMiddelWare = createSagaMiddleware();
 
-export const store = configureStore( { reducer:CrudReducer,  middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware({ thunk: false }).concat(sagaMiddleware), } );
-sagaMiddleware.run(mySaga);
+export const store = createStore(CrudReducer,applyMiddleware(sagaMiddelWare));
+sagaMiddelWare.run(Watcherfecth)
