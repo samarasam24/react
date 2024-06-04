@@ -1,13 +1,8 @@
-import { Provider } from 'react-redux';
-import './App.css';  
-import { CrudForm } from './components/CrudForm';
-import { store } from './store/Store';
+import './App.css';   
 
 function App() {
   return ( 
-     <Provider store={store}>
-      <CrudForm/>  
-     </Provider>  
+     <h1>hi</h1>
   );
 };
 
