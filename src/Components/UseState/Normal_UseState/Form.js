@@ -1,6 +1,6 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom"; 
-export function FormComponent( { setEditId,editId,allUserData,setAllUserData } ) {
+export function FormComponent( { editId,addOrEdit,allUserData } ) {
     
     const navigate = useNavigate(); 
     const [ userData,SetUserData ] = useState(
@@ -9,64 +9,63 @@ export function FormComponent( { setEditId,editId,allUserData,setAllUserData } )
             userPassword:''
         }
     ); 
+
+    useEffect(() => {
+
+    if(editId !== null) {  
+       SetUserData({
+        ...allUserData,
+        userName:allUserData[editId].userName,
+        userPassword:allUserData[editId].userPassword,
+       });
+    }
+    },[editId,allUserData])
+
     const handleChange = (e) => {
 
         const { name,value } = e.target;
-        
-       if(editId === null) {
         SetUserData(
             {
                 ...userData,
                 [name]:value
             }
         );
-       }else{
-        
-       }
     };
+
     const handleSubmit = (e) => {
         e.preventDefault();
-       
-         
         
-      if(editId === null){
-        setAllUserData([
-            ...allUserData,
-            userData]);
-      }else{
-        setAllUserData( [
-            ...allUserData,
-            allUserData[editId].userName=userData.userName,
-            allUserData[editId].userPassword=userData.userPassword
-        ] )
-      }
-         
-        navigate('/table-content');
+      addOrEdit(userData);
+      SetUserData(
+        {
+            userName:'',
+            userPassword:''
+        }
+      ); 
+      navigate('/table-content');
     };
  
     return( 
-        <div>
-            <form onSubmit={handleSubmit}>
-            <h1>UseState</h1>
+        <>
+            <form
+            className="d-flex justify-content-center flex-column border border-dark p-5 py-4 gap-2 rounded"
+            onSubmit={handleSubmit}>
+            <h1>UseState Non-Api</h1>
             <label>Name:</label>
             <input
             onChange={ handleChange }
             name="userName"
-            value={ 
-                editId === null ? userData.userName : allUserData[editId].userName 
-                }/>
+            value={userData.userName}/>
 
             <label>Password:</label>
             <input
             onChange={ handleChange }
             name="userPassword"
-            value={ 
-                editId === null ? userData.userPassword : allUserData[editId].userPassword 
-                }/>
+            value={userData.userPassword}/>
 
-            <button>Submit</button>
+            <button className="align-self-center rounded btn-primary">Submit</button>
         </form>
          
-        </div>
+        </>
     );
 };

@@ -1,22 +1,11 @@
-import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-export function TableComponent({setEditId,allUserData}) {
+export function TableComponent({allUserData,editData,deleteData}) {
 
-    const navigate = useNavigate();
-    const [formData,setFormData] = useState(allUserData);
-    const handleDelete = (id) => {
-        const updatedUser = [...allUserData];
-        updatedUser.splice(id,1);
-        setFormData(updatedUser);
-        allUserData.splice(id,1);
-    };
-    const handleEdit = (id) => {
-      setEditId(id)
-      navigate('/');
-    } 
+    const navigate = useNavigate(); 
     return(
-        <table>
+        <>
+        <table className="table table-bordered border-dark text-center">
           
             <thead>
                 <tr>
@@ -27,14 +16,23 @@ export function TableComponent({setEditId,allUserData}) {
              </thead> 
              <tbody>
                 {
-                    formData.map( (value,index) =>{
+                    allUserData.map( (value,index) =>{
                         return(
                             <tr key={index}>
                                 <td>{value.userName}</td>
                                 <td>{value.userPassword}</td>
                                 <td>
-                                    <button onClick={() => handleEdit(index)}>Edit</button>
-                                    <button onClick={() => handleDelete(index)}>Delete</button>
+                                    <button 
+                                    className="btn-primary rounded"
+                                    onClick={() =>{
+                                        editData(index);
+                                        navigate('/');
+                                        }}>Edit</button>
+                                        {'  '}
+                                    <button
+                                    className="btn-danger rounded"
+                                    onClick={() => 
+                                        deleteData(index)}>Delete</button>
                                 </td>
                             </tr>
                         )
@@ -42,5 +40,9 @@ export function TableComponent({setEditId,allUserData}) {
                 }
             </tbody>
         </table>
+        <button
+        className="btn-secondary rounded"
+        onClick={() => navigate('/') }>Back</button>
+        </>
     );
 };
