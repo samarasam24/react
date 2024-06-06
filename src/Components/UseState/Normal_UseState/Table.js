@@ -1,11 +1,11 @@
 import { useNavigate } from "react-router-dom";
 
-export function TableComponent({allUserData,editData,deleteData}) {
+export function NonApiTable({allUserData,editData,deleteData}) {
 
     const navigate = useNavigate(); 
     return(
-        <>
-        <table className="table table-bordered border-dark text-center">
+        <div className="container-fluid  col-7 d-flex flex-column mt-5 pt-5">
+        <table className=" table table-bordered border-dark text-center">
           
             <thead>
                 <tr>
@@ -26,7 +26,7 @@ export function TableComponent({allUserData,editData,deleteData}) {
                                     className="btn-primary rounded"
                                     onClick={() =>{
                                         editData(index);
-                                        navigate('/');
+                                        navigate('/non-api-form');
                                         }}>Edit</button>
                                         {'  '}
                                     <button
@@ -41,8 +41,8 @@ export function TableComponent({allUserData,editData,deleteData}) {
             </tbody>
         </table>
         <button
-        className="btn-secondary rounded"
-        onClick={() => navigate('/') }>Back</button>
-        </>
+        className="btn-secondary rounded align-self-start"
+        onClick={() => navigate('/non-api-form') }>Back</button>
+        </div>
     );
 };

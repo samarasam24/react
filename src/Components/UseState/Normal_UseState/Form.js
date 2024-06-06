@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom"; 
-export function FormComponent( { editId,addOrEdit,allUserData } ) {
+export function NonApiForm( { editId,addOrEdit,allUserData } ) {
     
     const navigate = useNavigate(); 
     const [ userData,SetUserData ] = useState(
@@ -42,13 +42,13 @@ export function FormComponent( { editId,addOrEdit,allUserData } ) {
             userPassword:''
         }
       ); 
-      navigate('/table-content');
+      navigate('/non-api-table-content');
     };
  
     return( 
-        <>
+        <div className="position-absolute w-100" id="withoutApiForm">
             <form
-            className="d-flex justify-content-center flex-column border border-dark p-5 py-4 gap-2 rounded"
+            className=" container-fluid col-4 mt-5 mx-auto d-flex flex-column border border-dark p-5 py-4 gap-2 rounded"
             onSubmit={handleSubmit}>
             <h1>UseState Non-Api</h1>
             <label>Name:</label>
@@ -63,9 +63,9 @@ export function FormComponent( { editId,addOrEdit,allUserData } ) {
             name="userPassword"
             value={userData.userPassword}/>
 
-            <button className="align-self-center rounded btn-primary">Submit</button>
+            <button className="align-self-end me-2 rounded btn-primary">Submit</button>
         </form>
          
-        </>
+        </div>
     );
 };
