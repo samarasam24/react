@@ -3,6 +3,14 @@
     color: rgb(11, 223, 11);
 }
 #useStateul{  
- top: 5%;
- left: 91%;  
+ top: 84%;
+ left: -13%;
+ width: 120px;  
+}
+.nav-link:hover{
+    color: green !important;
+}
+#useReducerul{
+    top: 6%;
+    left: 89%;
 }

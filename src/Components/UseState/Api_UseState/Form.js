@@ -2,7 +2,7 @@ import {  useEffect, useState } from "react";
 import {  apiGetByIdMethod, apiPostMethod, apiPutMethod } from "../../Api/MockApi";
 import {  useNavigate, useParams } from "react-router-dom";
 import * as Yup from 'yup';
-import { useFormik } from "formik";
+import { useFormik } from "formik"; 
 
 export function FormApi() { 
     const navigate = useNavigate(); 
@@ -25,7 +25,7 @@ export function FormApi() {
             userEmail:Yup.string().email('Invalid email format').required('Email is Required'),
             phoneNumber: Yup.number().required('Phone Number is Required').positive().integer(),
             userAge:Yup.number().required('Age is Required').positive().integer(),
-            userAddress: Yup.string().required('Address is Required')
+            userAddress:Yup.string().required('Address is Required')
         }
     );
     const onSubmit = async (value,{resetForm}) => { 
@@ -63,7 +63,8 @@ export function FormApi() {
     return(
         <>
         <form
-        className=" container-fluid col-7 mx-auto border border-dark rounded row py-5  gap-2 justify-content-center"
+        id="apiUseState"
+        className=" position-absolute container-fluid col-7 mx-auto shadow rounded row py-5  gap-2 justify-content-center"
         onSubmit={formik.handleSubmit}>
            
            <div className="d-flex flex-column col-9">
@@ -73,10 +74,12 @@ export function FormApi() {
            <div className="d-flex flex-column col-4">
                 <label>Name:</label>        {/*name-field*/}
                 <input
+                className="border border-none rounded shadow-sm"
                 name="userName"
                 value={formik.values.userName}
-                onChange={formik.handleChange}/> 
-                {formik.touched.userName && (<span className="text-danger">{formik.errors.userName}</span>)}
+                onChange={formik.handleChange}
+                onBlur={formik.handleBlur}/> 
+                {formik.touched.userName && formik.errors.userName ? (<span className="text-danger">{formik.errors.userName}</span>):null}
            </div>
            
 
@@ -84,61 +87,76 @@ export function FormApi() {
                 <label>Password:</label>    {/*password-field*/}
                 <input
                 name="userPassword"
+                 className="border border-none rounded shadow-sm"
                 value={formik.values.userPassword}
-                onChange={formik.handleChange}/> 
-                {formik.touched.userPassword && (<span className="text-danger">{formik.errors.userPassword}</span>)}
+                onChange={formik.handleChange}
+                onBlur={formik.handleBlur}/>  
+                {formik.touched.userPassword && formik.errors.userPassword ?(<span className="text-danger">{formik.errors.userPassword}</span>):null}
            </div> 
 
            <div className="d-flex flex-column col-4">
              <label>Confirm Password:</label>
              <input
              name="confirmPassword"
+             className="border border-none rounded shadow-sm"
              value={formik.values.confirmPassword}
-             onChange={formik.handleChange}/> 
-             {formik.touched.confirmPassword  && (<span className="text-danger">{formik.errors.confirmPassword}</span>)}
+             onChange={formik.handleChange}
+             onBlur={formik.handleBlur}/> 
+            { formik.touched.confirmPassword  && formik.errors.confirmPassword ? (
+                <span className="text-danger">{formik.errors.confirmPassword}</span>
+            ):null }
            </div>
 
            <div className="d-flex flex-column col-5">
            <label>Email:</label>
             <input
             name="userEmail"
+            className="border border-none rounded shadow-sm"
             value={formik.values.userEmail}
-            onChange={formik.handleChange}/> 
-           {formik.touched.userEmail && ( <span className="text-danger">{formik.errors.userEmail}</span>)}
+            onChange={formik.handleChange}
+            onBlur={formik.handleBlur}/> 
+           {formik.touched.userEmail && formik.errors.userEmail ? ( <span className="text-danger">{formik.errors.userEmail}</span>):null}
            </div>
 
            <div className="d-flex flex-column col-4">
            <label>Phone Number:</label>
             <input
+            className="border border-none rounded shadow-sm"
             name="phoneNumber"
             value={formik.values.phoneNumber}
-            onChange={formik.handleChange}/> 
-            {formik.touched.phoneNumber && (<span className="text-danger">{formik.errors.phoneNumber}</span>)}
+            onChange={formik.handleChange}
+            onBlur={formik.handleBlur}/> 
+            {formik.touched.phoneNumber && formik.errors.phoneNumber ? (<span className="text-danger">{formik.errors.phoneNumber}</span>):null}
            </div>
 
            <div className="d-flex flex-column col-5">
            <label>Age:</label>
             <input
             name="userAge"
+             className="border border-none rounded shadow-sm"
             value={formik.values.userAge}
-            onChange={formik.handleChange}/> 
-            {formik.touched.userAge&&(<span  className="text-danger">{formik.errors.userAge}</span>)}
+            onChange={formik.handleChange}
+            onBlur={formik.handleBlur}/> 
+            {formik.touched.userAge && formik.errors.userAge ?(<span  className="text-danger">{formik.errors.userAge}</span>):null}
            </div>
 
            <div className="d-flex flex-column col-9 px-2 ">
            <label>Address:</label>
             <textarea 
             name="userAddress"
+             className="border border-none rounded shadow-sm"
             value={formik.values.userAddress}
-            onChange={formik.handleChange}/> 
-            {formik.touched.userAddress&&(<span className="text-danger">{formik.errors.userAddress}</span>)}
+            onChange={formik.handleChange}
+            onBlur={formik.handleBlur}/> 
+            {formik.touched.userAddress&&formik.errors.userAddress ?(<span className="text-danger">{formik.errors.userAddress}</span>):null}
            </div>
                         
             <div className="col-9 d-flex flex-column">
             <button 
-            className="align-self-end rounded  btn-primary">Submit</button>
+            className="align-self-end rounded  btn-primary shadow">Submit</button>
             </div>
         </form>
         </>
     );
 };
+

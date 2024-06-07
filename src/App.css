@@ -1,3 +1,15 @@
 #withoutApiForm{
     top:25%;
 }
+#apiUseState{
+    top: 19%;
+    left: 20%;
+}
+#apiTable{
+    top: 19%;
+    left: 17%;
+}
+#loaderApi{
+    top:50%;
+    left: 47%;
+}

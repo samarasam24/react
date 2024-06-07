@@ -22,9 +22,12 @@ export const apiGetMethod = async () => {
         console.error(error);
     }
 };
-export const apiDeleteMethod = (id) => {
+export const apiDeleteMethod = async (id) => {
     try {
-        axios.delete(`${MockApi}/${id}`)
+      const response = await  axios.delete(`${MockApi}/${id}`)
+      const status = response.status;
+      return status;
+     
     } catch (error) {
         console.error(error);
     }

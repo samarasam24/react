@@ -21,17 +21,15 @@ export function TableApi() {
         fetchData(); 
     },[]);  
 
-    function handleDelete(id)  {
-        apiDeleteMethod(id); 
+    async function handleDelete(id)  {
+       const statusCode = await apiDeleteMethod(id); 
         setAllUser(
             {
                 ...allUser,
                 ready:false
             }
         );
-        setTimeout( () => {
-            fetchData()
-        },300) 
+        if (statusCode === 200) fetchData();
     };
 
     const handleEdit = (id) => {
@@ -41,8 +39,10 @@ export function TableApi() {
     return(
         <>
         {
-         !allUser.ready? 'Loading.....':
-         <div className="d-flex flex-column">
+         !allUser.ready ? <div id="loaderApi" className="position-absolute">Loading.....</div>:
+         <div
+         id="apiTable"
+          className="d-flex flex-column position-absolute">
          <table className=" table table-bordered">
             <thead>
                 <tr>
