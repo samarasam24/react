@@ -1,16 +1,27 @@
-#useState:hover{ 
+#useState:hover #useStateul{ 
     cursor: pointer;
     color: rgb(11, 223, 11);
+    display: block;
 }
 #useStateul{  
- top: 84%;
- left: -13%;
- width: 120px;  
+ display: none;
+ top: 100%;
+ left: -8%;
+ width: 103px;  
+ z-index: 3;
 }
 .nav-link:hover{
     color: green !important;
+} 
+#useReducer:hover #useReducerul{ 
+    cursor: pointer;
+    color: rgb(11, 223, 11);
+    display: block;
 }
-#useReducerul{
-    top: 6%;
-    left: 89%;
-}
+#useReducerul{  
+    display: none;
+    top: 100%;
+    left: -2%;
+    width: 103px;  
+    z-index: 3;
+   }

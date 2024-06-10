@@ -5,9 +5,14 @@ import { NonApiForm } from './Components/UseState/Normal_UseState/Form.js';
 import { NonApiTable } from './Components/UseState/Normal_UseState/Table.js';
 import './App.css'
 import { Navbar } from './Components/Navbar/Navbar.js';
-import { useState } from 'react';
+import { useReducer, useState } from 'react';
+import { UseReducerAPi } from './Components/UseReducer/Api_UseReducer/Form.js';
+import { UseReducerNonAPi } from './Components/UseReducer/Normal_UseReducer/Form.js'; 
+import { UseReducerNonAPiTable } from './Components/UseReducer/Normal_UseReducer/Table.js';
+import { Reducer, initialValue } from './Components/UseReducer/Normal_UseReducer/Reducer/Reducer.js';
 function App() {
 
+  //Normal-UseState
   const [allUserData,setAllUserData] = useState([]);
   const [editId,setEditId] = useState(null); 
 
@@ -40,6 +45,9 @@ function App() {
       allUserData.filter((_,id) => id !== index)
     );
   };
+
+  //Normal UseReducer
+  const [ data,dispatch ] = useReducer(Reducer,initialValue); 
   
   return (   
     
@@ -62,6 +70,9 @@ function App() {
               allUserData={allUserData} 
               editData={editData} 
               deleteData={deleteData} /> }/>
+            <Route path='/usereducer/api-form' element={<UseReducerAPi/>}/>
+            <Route path='/usereducer/non-api-form' element={<UseReducerNonAPi data={data} dispatch={dispatch}/>}/> 
+            <Route path='/usereducer/non-api-form/table' element={<UseReducerNonAPiTable data={data} dispatch={dispatch}/>}/>
       </Routes>
     </BrowserRouter>
   );
