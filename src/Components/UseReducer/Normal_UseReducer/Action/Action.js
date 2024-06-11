@@ -1,4 +1,4 @@
-import { ADD_USER, DELETE_USER, EDIT_USER, GET_DATA } from "../Type/Type";
+import { ADD_USER, DELETE_USER, EDIT_USER, GET_DATA, UPDATE_USER } from "../Type/Type";
 
 export const addUserData = (actionType,data) => { 
     return {
@@ -30,4 +30,11 @@ export const editUser = (id) => {
         type:EDIT_USER,
         payload:id
     }
+};
+
+export const updateUser = (obj) => {
+    return {
+        type:UPDATE_USER,
+        payload:obj
+    };
 };

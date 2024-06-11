@@ -1,4 +1,4 @@
-import { ADD_USER, ADD_USERNAME, ADD_USERPASSWORD, DELETE_USER, EDIT_USER, GET_DATA } from "../Type/Type";
+import { ADD_USER, ADD_USERNAME, ADD_USERPASSWORD, DELETE_USER, EDIT_USER, GET_DATA, UPDATE_USER } from "../Type/Type";
 
 export const initialValue = {
     allUser:[],
@@ -38,12 +38,23 @@ export function Reducer( state,action ) {
                 allUser:state.allUser.filter( value  => value.id !== action.payload )
             };
         case EDIT_USER: ;
-              const editName = state.allUser.reduce((_,value) => ( value.id === action.payload ?  value.userName : '' ));
+        
+        const [ { userName,userPassword } ] =  state.allUser.filter((value) => 
+            ( value.id === action.payload && value.userName)); 
+        
+        return {
+                ...state,
+                userName:userName,
+                userPassword:userPassword
+            };
+        case UPDATE_USER: 
+        const newData = state.allUser.splice(action.payload.id,1,action.payload)
+        console.log(newData);
             return {
                 ...state,
-                userName:editName.userName,
+                userName:'',
                 userPassword:''
-            };
+            }
         default:
            return {
             ...state

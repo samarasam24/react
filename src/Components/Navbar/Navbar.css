@@ -6,9 +6,12 @@
 #useStateul{  
  display: none;
  top: 100%;
- left: -8%;
- width: 103px;  
- z-index: 3;
+ left: -2%;
+ width: 90px;  
+ z-index: 3; 
+} 
+.nav-link{
+    font-size: 14px !important;
 }
 .nav-link:hover{
     color: green !important;
@@ -21,7 +24,7 @@
 #useReducerul{  
     display: none;
     top: 100%;
-    left: -2%;
+    left: 1%;
     width: 103px;  
     z-index: 3;
-   }
+}

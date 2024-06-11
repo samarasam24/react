@@ -72,6 +72,7 @@ function App() {
               deleteData={deleteData} /> }/>
             <Route path='/usereducer/api-form' element={<UseReducerAPi/>}/>
             <Route path='/usereducer/non-api-form' element={<UseReducerNonAPi data={data} dispatch={dispatch}/>}/> 
+            <Route path='/usereducer/non-api-form/:id' element={<UseReducerNonAPi data={data} dispatch={dispatch}/>}/> 
             <Route path='/usereducer/non-api-form/table' element={<UseReducerNonAPiTable data={data} dispatch={dispatch}/>}/>
       </Routes>
     </BrowserRouter>

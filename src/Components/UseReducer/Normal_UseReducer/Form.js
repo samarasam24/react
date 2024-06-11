@@ -1,19 +1,38 @@
 import { ADD_USERNAME, ADD_USERPASSWORD } from "./Type/Type";
-import { addUser, addUserData } from "./Action/Action";
-import { useNavigate } from "react-router-dom";
+import { addUser, addUserData,updateUser } from "./Action/Action";
+import { useNavigate,useParams } from "react-router-dom";
+import { useEffect, useState } from "react";
 
 export function UseReducerNonAPi({data,dispatch}){
 
    
     const navigate = useNavigate();
+    const {id} = useParams(); 
+    const [ editId , setEditId] = useState(null);
 
     const handleChange = (e) => {
         const {name,value} = e.target;
         dispatch(addUserData(name,value));
-    };
-
+    };  
+    useEffect( () => {
+        if (id !== undefined) {
+             setEditId( id.substring(1,2) );
+        }
+    },[])
     const handleSubmit = (e) => {
         e.preventDefault(); 
+        
+       if(editId !== null) {
+        dispatch(
+            updateUser(
+                {
+                    id:editId,
+                    userName:data.userName,
+                    userPassword:data.userPassword
+                }
+            )
+        );
+       }else {
         dispatch(
             addUser(
                 {   
@@ -23,6 +42,7 @@ export function UseReducerNonAPi({data,dispatch}){
                 }
             )
         );
+       }
         navigate('/usereducer/non-api-form/table');
     };
 

@@ -24,7 +24,7 @@ export function Navbar() {
                     className={`navbar-nav navbar text-start  bg-white py-0 border-secondary shadow rounded position-absolute`} 
                     id='useReducerul'>
                         <li className="nav-item border-bottom px-0 ps-1">
-                        <a className="nav-link text-secondary px-0" href="/usereducer/api-form">With-Api</a>
+                        <a className="nav-link text-secondary px-0 " href="/usereducer/api-form">With-Api</a>
                         </li>
                         <li className="nav-item px-0 ps-1">
                         <a className="nav-link text-secondary px-0" href="/usereducer/non-api-form">Without-Api</a>
