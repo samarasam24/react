@@ -10,6 +10,7 @@ import { UseReducerAPi } from './Components/UseReducer/Api_UseReducer/Form.js';
 import { UseReducerNonAPi } from './Components/UseReducer/Normal_UseReducer/Form.js'; 
 import { UseReducerNonAPiTable } from './Components/UseReducer/Normal_UseReducer/Table.js';
 import { Reducer, initialValue } from './Components/UseReducer/Normal_UseReducer/Reducer/Reducer.js';
+import { UseReducerAPiTable } from './Components/UseReducer/Api_UseReducer/Table.js';
 function App() {
 
   //Normal-UseState
@@ -70,10 +71,11 @@ function App() {
               allUserData={allUserData} 
               editData={editData} 
               deleteData={deleteData} /> }/>
-            <Route path='/usereducer/api-form' element={<UseReducerAPi/>}/>
             <Route path='/usereducer/non-api-form' element={<UseReducerNonAPi data={data} dispatch={dispatch}/>}/> 
             <Route path='/usereducer/non-api-form/:id' element={<UseReducerNonAPi data={data} dispatch={dispatch}/>}/> 
             <Route path='/usereducer/non-api-form/table' element={<UseReducerNonAPiTable data={data} dispatch={dispatch}/>}/>
+            <Route path='/usereducer/api-form' element={<UseReducerAPi/>}/>
+            <Route path='/usereducer/api-form/table' element={<UseReducerAPiTable/>}/>
       </Routes>
     </BrowserRouter>
   );

@@ -22,6 +22,7 @@ export const apiGetMethod = async () => {
         console.error(error);
     }
 };
+
 export const apiDeleteMethod = async (id) => {
     try {
       const response = await  axios.delete(`${MockApi}/${id}`)

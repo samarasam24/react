@@ -21,3 +21,7 @@
     top: 30%;
     left: 33%;
 }
+.MuiTableContainer-root{
+    display: flex; 
+    min-height: 100vh;
+}
