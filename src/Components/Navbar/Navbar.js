@@ -18,6 +18,19 @@ export function Navbar() {
                         </li>
                     </ul>
                 </li>
+                <li className="nav-item btn btn-secondary position-relative me-2" id="useReducer">
+                    UseFormik
+                    <ul 
+                    className={`navbar-nav navbar text-start  bg-white py-0 border-secondary shadow rounded position-absolute`} 
+                    id='useReducerul'>
+                        <li className="nav-item border-bottom px-0 ps-1">
+                        <a className="nav-link text-secondary px-0 " href="/useformik/reducer-form">UseFormik</a>
+                        </li>
+                        <li className="nav-item px-0 ps-1">
+                        <a className="nav-link text-secondary px-0" href="/useformik/reducer-form">UseReducer</a>
+                        </li>
+                    </ul>
+                </li>
                 <li className="nav-item btn btn-secondary position-relative " id="useReducer">
                     UseReducer
                     <ul 
@@ -31,6 +44,7 @@ export function Navbar() {
                         </li>
                     </ul>
                 </li>
+                
             </ul>
         </nav>
         </>

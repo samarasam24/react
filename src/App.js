@@ -11,6 +11,8 @@ import { UseReducerNonAPi } from './Components/UseReducer/Normal_UseReducer/Form
 import { UseReducerNonAPiTable } from './Components/UseReducer/Normal_UseReducer/Table.js';
 import { Reducer, initialValue } from './Components/UseReducer/Normal_UseReducer/Reducer/Reducer.js';
 import { UseReducerAPiTable } from './Components/UseReducer/Api_UseReducer/Table.js';
+import { FormikReducerAPi } from './Components/UseFormik/ReducerFormik/Form.js';
+import { FormikReducerTable } from './Components/UseFormik/ReducerFormik/Table.js';
 function App() {
 
   //Normal-UseState
@@ -75,7 +77,11 @@ function App() {
             <Route path='/usereducer/non-api-form/:id' element={<UseReducerNonAPi data={data} dispatch={dispatch}/>}/> 
             <Route path='/usereducer/non-api-form/table' element={<UseReducerNonAPiTable data={data} dispatch={dispatch}/>}/>
             <Route path='/usereducer/api-form' element={<UseReducerAPi/>}/>
+            <Route path='/usereducer/api-form/:id' element={<UseReducerAPi/>}/>
             <Route path='/usereducer/api-form/table' element={<UseReducerAPiTable/>}/>
+            <Route path='/useformik/reducer-form' element={<FormikReducerAPi/>}/>
+            <Route path='/useformik/reducer-form/:id' element={<FormikReducerAPi/>}/>
+            <Route path='/useformik/reducer-form/table' element={<FormikReducerTable/>}/>
       </Routes>
     </BrowserRouter>
   );

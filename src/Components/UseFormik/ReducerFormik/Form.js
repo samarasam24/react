@@ -1,16 +1,16 @@
 import  TextField  from "@mui/material/TextField";
 import  Box  from "@mui/material/Box";
 import  shadows from "@mui/material/styles/shadows";
-import  Button  from "@mui/material/Button"; 
-import { ADD_USERNAME, ADD_USERPASSWORD } from "./Type/Type"; 
+import  Button  from "@mui/material/Button";  
 import { addUser, addUserDetail, editUser } from "./Action/Action";
 import { useEffect, useReducer } from "react";
 import { Reducer, userDetails } from "./Reducer/Reducer";
 import { useNavigate, useParams } from "react-router-dom";
 import { apiGetByIdMethod } from "../../Api/MockApi";
+import { ADD_USERNAME, ADD_USERPASSWORD } from "./Type/Type";
 
  
- export function UseReducerAPi(){ 
+ export function FormikReducerAPi(){ 
 
     const {id} = useParams();
     const navigate = useNavigate();
@@ -42,7 +42,7 @@ import { apiGetByIdMethod } from "../../Api/MockApi";
             )
         );
        };
-        navigate('/usereducer/api-form/table');
+        navigate('/useformik/reducer-form/table');
     };
      
     const fetchData = async () => {
@@ -73,7 +73,7 @@ import { apiGetByIdMethod } from "../../Api/MockApi";
             width={400} 
             onSubmit={handleSubmit}
         >
-        <Box component={'h4'}> UseReducer With-Api</Box>
+        <Box component={'h4'}> Formik Reducer</Box>
         <label>Name:</label>
         <TextField
             name={ADD_USERNAME}

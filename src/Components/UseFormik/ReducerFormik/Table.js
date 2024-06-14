@@ -11,7 +11,7 @@ import { deletRequest, deleteSuccess, getData } from './Action/Action';
 import { Box } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 
-export function UseReducerAPiTable() {
+export function FormikReducerTable() {
 
   const navigate = useNavigate();
   const [ userDatas, dispatch ] = useReducer(Reducer,userDetails );
@@ -32,7 +32,7 @@ export function UseReducerAPiTable() {
   };
 
   const handleEdit = (id) => {
-    navigate(`/usereducer/api-form/${id}`);
+    navigate(`/useformik/reducer-form/${id}`);
   };
   
   useEffect( () => {
@@ -87,7 +87,7 @@ export function UseReducerAPiTable() {
              }
           </TableBody>
         </Table>
-        <Box marginLeft={20} marginTop={5}><Button variant='outlined' type='button' onClick={() => navigate('/usereducer/api-form')}>Back</Button></Box>
+        <Box marginLeft={20} marginTop={5}><Button variant='outlined' type='button' onClick={() => navigate('/useformik/reducer-form')}>Back</Button></Box>
         </>
      }
      </>    
