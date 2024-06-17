@@ -13,6 +13,8 @@ import { Reducer, initialValue } from './Components/UseReducer/Normal_UseReducer
 import { UseReducerAPiTable } from './Components/UseReducer/Api_UseReducer/Table.js';
 import { FormikReducerAPi } from './Components/UseFormik/ReducerFormik/Form.js';
 import { FormikReducerTable } from './Components/UseFormik/ReducerFormik/Table.js';
+import { FormikForm } from './Components/UseFormik/NormalFormik/Form.js';
+import { FormikTable } from './Components/UseFormik/NormalFormik/Table.js';
 function App() {
 
   //Normal-UseState
@@ -82,6 +84,9 @@ function App() {
             <Route path='/useformik/reducer-form' element={<FormikReducerAPi/>}/>
             <Route path='/useformik/reducer-form/:id' element={<FormikReducerAPi/>}/>
             <Route path='/useformik/reducer-form/table' element={<FormikReducerTable/>}/>
+            <Route path='/useformik/form' element={<FormikForm/>}/>
+            <Route path='/useformik/form/:id' element={<FormikForm/>}/>
+            <Route path='/useformik/form/table' element={<FormikTable/>}/>
       </Routes>
     </BrowserRouter>
   );

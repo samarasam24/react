@@ -19,7 +19,8 @@
 }
 #useReducerAPi{
     top: 30%;
-    left: 33%;
+    left: 25%;
+    grid-template-columns: auto auto;
 }
 .MuiTableContainer-root{
     display: flex; 

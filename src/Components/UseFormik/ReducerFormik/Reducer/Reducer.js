@@ -1,9 +1,10 @@
-import { ADD_USER, ADD_USERNAME, ADD_USERPASSWORD, DELETE_REQUEST, DELETE_SUCCESS, GET_DATA } from "../Type/Type";
+import { ADD_USER, ADD_USEREMAIL, ADD_USERNAME, ADD_USERNUMBER, ADD_USERPASSWORD, DELETE_REQUEST, DELETE_SUCCESS, GET_DATA } from "../Type/Type";
 
 export const userDetails =  {
     apiData:[],
     userName:'',
     userPassword:'',
+    userEmail:'',
     lazzyLoader:true
 };
 
@@ -20,6 +21,16 @@ export const  Reducer = (state,action) => {
             return {
                 ...state,
                 userPassword:action.payload
+            };
+        case ADD_USEREMAIL:
+            return {
+              ...state,
+              userEmail:action.payload  
+            };
+        case ADD_USERNUMBER:
+            return {
+                ...state,
+                userNumber:action.payload  
             };
         case ADD_USER:   
             return {

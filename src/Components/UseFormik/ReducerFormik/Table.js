@@ -57,6 +57,8 @@ export function FormikReducerTable() {
             <TableRow>
               <TableCell align='center'>Name</TableCell> 
               <TableCell align='center'>Password</TableCell> 
+              <TableCell align='center'>Email</TableCell> 
+              <TableCell align='center'>Number</TableCell> 
               <TableCell align='center'>Action</TableCell> 
             </TableRow>
           </TableHead>
@@ -68,6 +70,8 @@ export function FormikReducerTable() {
                   <TableRow key={value.id}>
                     <TableCell align='center'>{value.userName}</TableCell>
                     <TableCell align='center'>{value.userPassword}</TableCell>
+                    <TableCell align='center'>{value.userEmail}</TableCell>
+                    <TableCell align='center'>{value.userNumber}</TableCell>
                     <TableCell align='center'>
                       <Button 
                         type='button'
