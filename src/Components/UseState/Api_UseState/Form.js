@@ -1,14 +1,12 @@
-import {  useEffect } from "react";
+import {  useEffect, useState } from "react";
 import {  apiGetByIdMethod, apiPostMethod, apiPutMethod } from "../../Api/MockApi";
-import {  useNavigate, useParams } from "react-router-dom";
-import * as Yup from 'yup';
-import { useFormik } from "formik"; 
+import {  useNavigate, useParams } from "react-router-dom"; 
 
 export function FormApi() { 
     const navigate = useNavigate(); 
     const editerId = useParams(); 
 
-    const initialValues = {
+    const [ userObj,setUserObj ] = useState({
             userName:'',
             userPassword:'',
             confirmPassword:'',
@@ -16,38 +14,46 @@ export function FormApi() {
             phoneNumber:'',
             userAge:'',
             userAddress:''
-    };
-    const validationSchema = Yup.object(
-        {
-            userName: Yup.string().required('Name is Required'),
-            userPassword:Yup.string().required('Password is Required'),
-            confirmPassword:Yup.string().oneOf([Yup.ref('userPassword'),null],'Password Must Be Same').required('Password is Required'),
-            userEmail:Yup.string().email('Invalid email format').required('Email is Required'),
-            phoneNumber: Yup.number().required('Phone Number is Required').positive().integer(),
-            userAge:Yup.number().required('Age is Required').positive().integer(),
-            userAddress:Yup.string().required('Address is Required')
-        }
-    );
-    const onSubmit = async (value,{resetForm}) => { 
-        if(editerId.id){
-            apiPutMethod(editerId.id,value);
-        }else{
-            apiPostMethod(value);
-        } 
-         resetForm();
-         navigate('/table');
-     };
-    const formik =useFormik({
-        initialValues,
-        validationSchema,
-        onSubmit
     }); 
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+       if(editerId.id){
+           apiPutMethod(editerId.id,userObj);
+       }else{
+           apiPostMethod(userObj) ;
+       }
+        setUserObj(
+            {
+                userName:'',
+                userPassword:'',
+                confirmPassword:'',
+                userEmail:'',
+                phoneNumber:'',
+                userAge:'',
+                userAddress:''
+            }
+        );
+        navigate('/table');
+    };
 
     const editById = async (id) => {
-       
+
         const newData = await apiGetByIdMethod(id);  
-        formik.setValues(newData)
+         setUserObj(
+            {
+                ...userObj,
+                userName: newData.userName,
+                userPassword:newData.userPassword,
+                confirmPassword:newData.confirmPassword,
+                userEmail:newData.userEmail,
+                phoneNumber:newData.phoneNumber,
+                userAge:newData.userAge,
+                userAddress:newData.userAddress
+            }
+         )
+
     };
+
     useEffect( () => {
         
         if (editerId.id) {
@@ -55,6 +61,17 @@ export function FormApi() {
         }
     },[]);
 
+    const handleChange = (e) => {
+        const {name,value} = e.target
+        setUserObj(
+            {
+                ...userObj,
+               [name]:value
+            }
+        );
+    };
+
+   
     
 
     
@@ -65,7 +82,7 @@ export function FormApi() {
         <form
         id="apiUseState"
         className=" position-absolute container-fluid col-7 mx-auto shadow rounded row py-5  gap-2 justify-content-center"
-        onSubmit={formik.handleSubmit}>
+        onSubmit={handleSubmit}>
            
            <div className="d-flex flex-column col-9">
              <h1>UseState-Api</h1>
@@ -76,10 +93,8 @@ export function FormApi() {
                 <input
                 className="border border-none rounded shadow-sm"
                 name="userName"
-                value={formik.values.userName}
-                onChange={formik.handleChange}
-                onBlur={formik.handleBlur}/> 
-                {formik.touched.userName && formik.errors.userName ? (<span className="text-danger">{formik.errors.userName}</span>):null}
+                value={userObj.userName}
+                onChange={handleChange} />  
            </div>
            
 
@@ -88,10 +103,8 @@ export function FormApi() {
                 <input
                 name="userPassword"
                  className="border border-none rounded shadow-sm"
-                value={formik.values.userPassword}
-                onChange={formik.handleChange}
-                onBlur={formik.handleBlur}/>  
-                {formik.touched.userPassword && formik.errors.userPassword ?(<span className="text-danger">{formik.errors.userPassword}</span>):null}
+                value={userObj.userPassword}
+                onChange={handleChange} />   
            </div> 
 
            <div className="d-flex flex-column col-4">
@@ -99,12 +112,8 @@ export function FormApi() {
              <input
              name="confirmPassword"
              className="border border-none rounded shadow-sm"
-             value={formik.values.confirmPassword}
-             onChange={formik.handleChange}
-             onBlur={formik.handleBlur}/> 
-            { formik.touched.confirmPassword  && formik.errors.confirmPassword ? (
-                <span className="text-danger">{formik.errors.confirmPassword}</span>
-            ):null }
+             value={userObj.confirmPassword}
+             onChange={ handleChange} />  
            </div>
 
            <div className="d-flex flex-column col-5">
@@ -112,10 +121,8 @@ export function FormApi() {
             <input
             name="userEmail"
             className="border border-none rounded shadow-sm"
-            value={formik.values.userEmail}
-            onChange={formik.handleChange}
-            onBlur={formik.handleBlur}/> 
-           {formik.touched.userEmail && formik.errors.userEmail ? ( <span className="text-danger">{formik.errors.userEmail}</span>):null}
+            value={userObj.userEmail}
+            onChange={ handleChange} />  
            </div>
 
            <div className="d-flex flex-column col-4">
@@ -123,10 +130,8 @@ export function FormApi() {
             <input
             className="border border-none rounded shadow-sm"
             name="phoneNumber"
-            value={formik.values.phoneNumber}
-            onChange={formik.handleChange}
-            onBlur={formik.handleBlur}/> 
-            {formik.touched.phoneNumber && formik.errors.phoneNumber ? (<span className="text-danger">{formik.errors.phoneNumber}</span>):null}
+            value={userObj.phoneNumber}
+            onChange={ handleChange} />  
            </div>
 
            <div className="d-flex flex-column col-5">
@@ -134,21 +139,17 @@ export function FormApi() {
             <input
             name="userAge"
              className="border border-none rounded shadow-sm"
-            value={formik.values.userAge}
-            onChange={formik.handleChange}
-            onBlur={formik.handleBlur}/> 
-            {formik.touched.userAge && formik.errors.userAge ?(<span  className="text-danger">{formik.errors.userAge}</span>):null}
+            value={userObj.userAge}
+            onChange={ handleChange} />  
            </div>
 
            <div className="d-flex flex-column col-9 px-2 ">
            <label>Address:</label>
             <textarea 
             name="userAddress"
-             className="border border-none rounded shadow-sm"
-            value={formik.values.userAddress}
-            onChange={formik.handleChange}
-            onBlur={formik.handleBlur}/> 
-            {formik.touched.userAddress&&formik.errors.userAddress ?(<span className="text-danger">{formik.errors.userAddress}</span>):null}
+            className="border border-none rounded shadow-sm"
+            value={userObj.userAddress}
+            onChange={ handleChange} />  
            </div>
                         
             <div className="col-9 d-flex flex-column">

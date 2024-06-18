@@ -11,10 +11,36 @@ export function Navbar() {
                     className={`navbar-nav navbar text-start  bg-white py-0 border-secondary shadow rounded position-absolute`} 
                     id='useStateul'>
                         <li className="nav-item border-bottom px-0 ps-1">
-                        <a className="nav-link text-secondary px-0" href="/form">With-Api</a>
+                        <a className="nav-link text-secondary px-0" href="/form">With-API</a>
                         </li>
                         <li className="nav-item px-0 ps-1">
-                        <a className="nav-link text-secondary px-0" href="/non-api-form">Without-Api</a>
+                        <a className="nav-link text-secondary px-0" href="/non-api-form">Without-API</a>
+                        </li>
+                    </ul>
+                </li>
+                <li className="nav-item btn btn-secondary position-relative me-2" id="useReducer">
+                    UseReducer
+                    <ul 
+                    className={`navbar-nav navbar text-start  bg-white py-0 border-secondary shadow rounded position-absolute`} 
+                    id='useReducerul'>
+                        <li className="nav-item border-bottom px-0 ps-1">
+                        <a className="nav-link text-secondary px-0 " href="/usereducer/api-form">With-API</a>
+                        </li>
+                        <li className="nav-item px-0 ps-1">
+                        <a className="nav-link text-secondary px-0" href="/usereducer/non-api-form">Without-API</a>
+                        </li>
+                    </ul>
+                </li>
+                <li className="nav-item btn btn-secondary position-relative me-2" id="useReducer">
+                    UseContext
+                    <ul 
+                    className={`navbar-nav navbar text-start  bg-white py-0 border-secondary shadow rounded position-absolute`} 
+                    id='useReducerul'>
+                        <li className="nav-item border-bottom px-0 ps-1">
+                        <a className="nav-link text-secondary px-0 " href="/">With-API</a>
+                        </li>
+                        <li className="nav-item px-0 ps-1">
+                        <a className="nav-link text-secondary px-0" href="/">Without-API</a>
                         </li>
                     </ul>
                 </li>
@@ -27,20 +53,7 @@ export function Navbar() {
                         <a className="nav-link text-secondary px-0 " href="/useformik/form">UseFormik</a>
                         </li>
                         <li className="nav-item px-0 ps-1">
-                        <a className="nav-link text-secondary px-0" href="/useformik/reducer-form">UseReducer</a>
-                        </li>
-                    </ul>
-                </li>
-                <li className="nav-item btn btn-secondary position-relative " id="useReducer">
-                    UseReducer
-                    <ul 
-                    className={`navbar-nav navbar text-start  bg-white py-0 border-secondary shadow rounded position-absolute`} 
-                    id='useReducerul'>
-                        <li className="nav-item border-bottom px-0 ps-1">
-                        <a className="nav-link text-secondary px-0 " href="/usereducer/api-form">With-Api</a>
-                        </li>
-                        <li className="nav-item px-0 ps-1">
-                        <a className="nav-link text-secondary px-0" href="/usereducer/non-api-form">Without-Api</a>
+                        <a className="nav-link text-secondary px-0" href="/useformik/reducer-form">Formik-Reducer</a>
                         </li>
                     </ul>
                 </li>
