@@ -14,7 +14,10 @@ import { UseReducerAPiTable } from './Components/UseReducer/Api_UseReducer/Table
 import { FormikReducerAPi } from './Components/UseFormik/ReducerFormik/Form.js';
 import { FormikReducerTable } from './Components/UseFormik/ReducerFormik/Table.js';
 import { FormikForm } from './Components/UseFormik/NormalFormik/Form.js';
-import { FormikTable } from './Components/UseFormik/NormalFormik/Table.js';
+import { FormikTable } from './Components/UseFormik/NormalFormik/Table.js'; 
+import { ContextForm } from './Components/UseContext/Form.js';
+import { ContextTable } from './Components/UseContext/Table.js'; 
+import { LoginComponenet } from './Components/Authentication/LogIn/Login.js';
 function App() {
 
   //Normal-UseState
@@ -87,6 +90,9 @@ function App() {
             <Route path='/useformik/form' element={<FormikForm/>}/>
             <Route path='/useformik/form/:id' element={<FormikForm/>}/>
             <Route path='/useformik/form/table' element={<FormikTable/>}/>
+            <Route path='/context/form' element={<ContextForm/>}/>
+            <Route path='/context/table' element={<ContextTable/>}/>
+            <Route path='/auth/login' element={<LoginComponenet/>}/>  
       </Routes>
     </BrowserRouter>
   );

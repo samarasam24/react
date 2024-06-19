@@ -57,6 +57,9 @@ export function Navbar() {
                         </li>
                     </ul>
                 </li>
+                <li className="nav-item position-relative me-2" id="login">
+                   <a id='loginlink' className='nav-link btn btn-primary text-white' href='/auth/login'>LogIn</a>
+                </li>
                 
             </ul>
         </nav>

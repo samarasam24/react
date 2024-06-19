@@ -27,4 +27,8 @@
     left: 1%;
     width: 103px;  
     z-index: 3;
+} 
+#loginlink:hover{
+    color: white !important;
 }
+ 
