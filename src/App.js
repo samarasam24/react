@@ -17,7 +17,8 @@ import { FormikForm } from './Components/UseFormik/NormalFormik/Form.js';
 import { FormikTable } from './Components/UseFormik/NormalFormik/Table.js'; 
 import { ContextForm } from './Components/UseContext/Form.js';
 import { ContextTable } from './Components/UseContext/Table.js'; 
-import { LoginComponenet } from './Components/Authentication/LogIn/Login.js';
+import { RegisterComponenet } from './Components/Authentication/Register/Register.js';
+import {LoginFormComponent} from './Components/Authentication/Login/Login.js';
 function App() {
 
   //Normal-UseState
@@ -92,7 +93,8 @@ function App() {
             <Route path='/useformik/form/table' element={<FormikTable/>}/>
             <Route path='/context/form' element={<ContextForm/>}/>
             <Route path='/context/table' element={<ContextTable/>}/>
-            <Route path='/auth/login' element={<LoginComponenet/>}/>  
+            <Route path='/auth/register' element={<RegisterComponenet/>}/>  
+            <Route path='/auth/login' element={<LoginFormComponent/>}/>
       </Routes>
     </BrowserRouter>
   );

@@ -1,96 +1,72 @@
-import { TextField, Button, Container, Typography,Box,Radio,FormLabel, RadioGroup, FormControlLabel } from '@mui/material';
+import { Container,Typography,TextField,Button,Box } from "@mui/material";
 import { useState } from 'react';
+import { apiLoginMethod } from "../../Api/AuthN-AuthR/LoginApi";
 
-export function LoginComponenet() {
+export function LoginFormComponent(){
 
-  const [ registerUser,setRegisterUser ] = useState(
-    {
-      userName:"",
-      email:"",
-      mobileNo:"",
-      password:"",
-      confirmPassword:"",
-      userRole:""
-    }
-  );
-
+    const [ logData,setLogdata ] = useState(
+        {
+            userName:'',
+            password:''
+        }
+    );
+    const handleChange = (e) => {
+        const { name,value } = e.target;
+        setLogdata(
+            {
+                ...logData,
+                [name]:value
+            }
+        );
+    }; 
+    const handleSubmit = async (e) => {
+        e.preventDefault(); 
+       const response  = await  apiLoginMethod(logData);
+       if(response.code === '400'){
+        alert('Password is Wrong');
+       }else{
+        alert('Logged SuccesFully');
+       };
+    };
     return(
-        <Container  sx={
+        <Container 
+        sx={
             {
                 marginTop:20, 
                 display:'flex',
                 justifyContent:'center', 
-                width:700
+                width:500
             }
-        }>
-        <form className='d-flex row gap-3 rounded shadow p-5 '>
-        <Typography component='h1' variant='h5'>Log In</Typography>
-        <Box display={'flex'} flexDirection={'column'} className='col-5 '>
-        <Typography component='label' variant='label'>Name:</Typography>
-        <TextField
-          variant="outlined" 
-          size='small'
-          value={registerUser.userName}
-        />
-        </Box>
-        <Box display={'flex'} flexDirection={'column'}  className='col-5' >
-        <Typography component='label' variant='label'>Email:</Typography>
-        <TextField
-          variant="outlined" 
-          size='small'
-          value={registerUser.email}
-        />
-        </Box>
-        <Box display={'flex'} flexDirection={'column'} className='col-5'>
-        <Typography component='label' variant='label'>Mobile.No:</Typography>
-         <TextField
-          variant="outlined" 
-          size='small'
-          value={registerUser.mobileNo}
-        />
-        </Box>
-        <Box display={'flex'} flexDirection={'column'} className='col-5'>
-        <Typography component='label' variant='label'>Password:</Typography>
-         <TextField
-          variant="outlined" 
-          size='small'
-          value={registerUser.password}
-        />
-        </Box>
-         <Box display={'flex'} flexDirection={'column'} className='col-5'>
-         <Typography component='label' variant='label'>Confirm Password:</Typography>
-         <TextField
-          variant="outlined" 
-          size='small'
-          value={registerUser.confirmPassword}
-        />
-         </Box>
-         <Box className='col-5'>
-           <FormLabel className='text-dark'>Role:</FormLabel>
-           <RadioGroup 
-           className='d-flex flex-row' 
-           value={registerUser.userRole}>
-              <FormControlLabel value="USER" control={<Radio />} label="USER"/>
-              <FormControlLabel value="ADMIN" control={<Radio />} label="ADMIN"/>
-           </RadioGroup>
-         </Box>
-        <Box>
-        <Button
-          type="submit" 
-          variant="contained"
-          color="primary"
-          size='small'
-           sx={
-            {
-                alignSelf:'end',
-            }
-           }
-           
+        }
         >
-          Register
-        </Button>
-        </Box>
-      </form>
+            <form className='d-flex row gap-3 rounded shadow p-5 ' onSubmit={handleSubmit}>
+                <Typography component='h5' variant='h5'>Log In</Typography>
+                <Box display={'flex'} flexDirection={'column'} >
+                    <Typography> Name: </Typography>
+                    <TextField
+                    variant="outlined" 
+                    size='small'
+                    name='userName'
+                    value={logData.userName}
+                    onChange={handleChange}/>
+                </Box>
+               <Box display={'flex'} flexDirection={'column'}>
+                    <Typography> Password: </Typography>
+                    <TextField
+                    variant="outlined" 
+                    size='small'
+                    name='password'
+                    value={logData.password}
+                    onChange={handleChange}/>
+               </Box>
+                <Box display={'flex'} justifyContent={'end'}>
+                    <Button 
+                    type='Submit'
+                    variant='contained'
+                    >Log In</Button>
+                </Box>
+            </form>
         </Container>
     );
 };
+
