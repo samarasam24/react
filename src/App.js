@@ -19,6 +19,8 @@ import { ContextForm } from './Components/UseContext/Form.js';
 import { ContextTable } from './Components/UseContext/Table.js'; 
 import { RegisterComponenet } from './Components/Authentication/Register/Register.js';
 import {LoginFormComponent} from './Components/Authentication/Login/Login.js';
+import { LoginSuccess } from './Components/Authentication/Login/LoginSuccess.js';
+import { UserTableComponent } from './Components/Authorization/User/UserTable.js';
 function App() {
 
   //Normal-UseState
@@ -95,6 +97,8 @@ function App() {
             <Route path='/context/table' element={<ContextTable/>}/>
             <Route path='/auth/register' element={<RegisterComponenet/>}/>  
             <Route path='/auth/login' element={<LoginFormComponent/>}/>
+            <Route path='/auth/login-success' element={<LoginSuccess/>}/>
+            <Route path='/auth/user/data' element={<UserTableComponent/>}/>
       </Routes>
     </BrowserRouter>
   );

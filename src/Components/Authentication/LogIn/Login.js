@@ -1,9 +1,11 @@
 import { Container,Typography,TextField,Button,Box } from "@mui/material";
 import { useState } from 'react';
 import { apiLoginMethod } from "../../Api/AuthN-AuthR/LoginApi";
+import { useNavigate } from "react-router-dom";
 
 export function LoginFormComponent(){
 
+    const navigate = useNavigate();
     const [ logData,setLogdata ] = useState(
         {
             userName:'',
@@ -24,8 +26,10 @@ export function LoginFormComponent(){
        const response  = await  apiLoginMethod(logData);
        if(response.code === '400'){
         alert('Password is Wrong');
-       }else{
-        alert('Logged SuccesFully');
+       }else{ 
+        localStorage.setItem('user', response.data.body.userName);
+        localStorage.setItem('token', response.data.body.jwt);
+        navigate('/auth/user/data');
        };
     };
     return(

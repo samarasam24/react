@@ -28,10 +28,12 @@ export function RegisterComponenet() {
     );
   }; 
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault(); 
-    // localStorage.setItem('user', JSON.stringify(registerUser));
-    authApiPost(registerUser);
+    const response = await authApiPost(registerUser);
+    if(response.data.message === "You have register successfully."){
+      navigate('/auth/login');
+    };
     setRegisterUser(
       {
         userName:"",
