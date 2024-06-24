@@ -8,7 +8,7 @@ export function LoginFormComponent(){
     const navigate = useNavigate();
     const [ logData,setLogdata ] = useState(
         {
-            userName:'',
+            email:'',
             password:''
         }
     );
@@ -22,12 +22,13 @@ export function LoginFormComponent(){
         );
     }; 
     const handleSubmit = async (e) => {
-        e.preventDefault(); 
-       const response  = await  apiLoginMethod(logData);
+       e.preventDefault(); 
+       const response  = await  apiLoginMethod(logData); 
        if(response.code === '400'){
         alert('Password is Wrong');
-       }else{ 
-        localStorage.setItem('user', response.data.body.userName);
+       }else{  
+
+        localStorage.setItem('email', response.data.body.userEmail);
         localStorage.setItem('token', response.data.body.jwt);
         navigate('/auth/user/data');
        };
@@ -46,12 +47,12 @@ export function LoginFormComponent(){
             <form className='d-flex row gap-3 rounded shadow p-5 ' onSubmit={handleSubmit}>
                 <Typography component='h5' variant='h5'>Log In</Typography>
                 <Box display={'flex'} flexDirection={'column'} >
-                    <Typography> Name: </Typography>
+                    <Typography> Email: </Typography>
                     <TextField
                     variant="outlined" 
                     size='small'
-                    name='userName'
-                    value={logData.userName}
+                    name='email'
+                    value={logData.email}
                     onChange={handleChange}/>
                 </Box>
                <Box display={'flex'} flexDirection={'column'}>

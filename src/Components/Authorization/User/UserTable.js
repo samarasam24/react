@@ -1,6 +1,9 @@
 import { Button, Table, TableBody, TableCell, TableHead, TableRow, TextField } from "@mui/material";
 import { useEffect, useState } from "react";
 import { getUserMethod } from "../../Api/AuthN-AuthR/UserGetApi";
+import { putApiMethod } from "../../Api/AuthN-AuthR/PutApi";
+import { delUserApi } from "../../Api/AuthN-AuthR/delUserApi";
+import { useNavigate } from "react-router-dom";
 
 export const UserTableComponent = () => {
 
@@ -10,13 +13,17 @@ export const UserTableComponent = () => {
         {
             username:false,
             email:false,
-            mobileNo:false
+            mobileNo:false,
+            popup:false
         }
     );
+    const navigate = useNavigate();
+    const email = localStorage.getItem('email');
+    const token = localStorage.getItem('token'); 
 
     async function fetchUser(payload,token){ 
-        const response = await getUserMethod(payload,token);
-        const {Authorities,Details} = response;  
+        const response = await getUserMethod(payload,token);  
+        const {Authorities,Details,} = response;  
         
         setUser(
             {
@@ -27,7 +34,10 @@ export const UserTableComponent = () => {
        
     };
 
-    const handleEdit = () => { 
+    const handleEdit = async (payload,token) => { 
+
+        console.log('edit',payload);
+         const res = await putApiMethod(payload,token);
     };
 
     const handleChange = (e) => {
@@ -38,14 +48,44 @@ export const UserTableComponent = () => {
                 [name]:value
             }
         );
+        document.addEventListener('keydown', (e) => {
+             if(e.key === 'Enter'){
+               if( name === 'userName' ){ setEdit(
+                    {
+                        ...edit,
+                        username:!edit.username,
+                        email:!edit.email
+                    }
+                )} else if ( name === 'email'){
+                     setEdit(
+                    {
+                        ...edit,
+                        email:!edit.email,
+                        mobileNo:!edit.mobileNo
+                    }
+                )} else if(name === 'mobileNo') {
+                    setEdit(
+                        {
+                            ...edit, 
+                            mobileNo:!edit.mobileNo,
+                            popup:!edit.popup
+                        }
+                    );
+                };
+             }
+            }
+        );
+    }; 
+
+    const handleDelete = () => {
+        delUserApi(user.email,token);
+        navigate('/auth/login');
     };
 
     useEffect( () => {
-        const userName = localStorage.getItem('user');
-        const token = localStorage.getItem('token');
-        fetchUser(userName,token);
-    },[]);  
-    console.log(user);
+        fetchUser(email,token);
+    },[]);   
+
     return(
         <Table 
         sx={
@@ -83,23 +123,26 @@ export const UserTableComponent = () => {
                     </TableCell>
                     <TableCell align="center">
                         { !edit.mobileNo ? <> {user.length !== 0 && user.mobileNo} </> : 
-                        <TextField size="small" value={user.mobileNo}></TextField>}
+                        <TextField 
+                        size="small"
+                        name="mobileNo"
+                        value={user.mobileNo}
+                        onChange={handleChange}/>}
                     </TableCell>
                     <TableCell align="center">{user.length !== 0 && user.role}</TableCell>
                     <TableCell align="center">
                         <Button 
                         onClick={ 
                             () => {
-                                handleEdit();
                                 setEdit(
                                     {
                                         ...edit,
-                                        username:true
+                                        username:!edit.username
                                     }
                                 )
                             }
                         }>Edit</Button>
-                        <Button>Delete</Button>
+                        <Button onClick={handleDelete}>Delete</Button>
                     </TableCell>
                 </TableRow>
             </TableBody>

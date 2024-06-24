@@ -10,7 +10,7 @@ export const getUserMethod = async (payload,token) => {
             headers: {
                 Authorization: `Bearer ${token}`,
               }, 
-        }); 
+        });   
         return response.data;
     } catch (error) {
         console.error(error);
