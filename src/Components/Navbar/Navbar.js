@@ -57,8 +57,18 @@ export function Navbar() {
                         </li>
                     </ul>
                 </li>
+                <li className="nav-item btn btn-secondary position-relative me-2" id="redux">
+                    Redux
+                    <ul 
+                    className={`navbar-nav navbar text-start  bg-white py-0 border-secondary shadow rounded position-absolute`} 
+                    id='reduxul'>
+                        <li className="nav-item border-bottom px-0 ps-1">
+                        <a className="nav-link text-secondary px-0 " href="/useformik/form">AuthN & AuthR</a>
+                        </li>
+                    </ul>
+                </li>
                 <li className="nav-item position-relative me-2" id="login">
-                   <a id='loginlink' className='nav-link btn btn-primary text-white' href='/auth/register'>Register</a>
+                   <a id='loginlink' className='nav-link btn btn-secondary text-white' href='/auth/register'>Register</a>
                 </li>
                 
             </ul>

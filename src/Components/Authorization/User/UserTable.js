@@ -36,8 +36,9 @@ export const UserTableComponent = () => {
 
     const handleEdit = async (payload,token) => { 
 
-        console.log('edit',payload);
+         console.log('edit',payload);
          const res = await putApiMethod(payload,token);
+         console.log('edit-table-res:',res);
     };
 
     const handleChange = (e) => {

@@ -7,9 +7,16 @@ export const authApiPost = async (payload) => {
     
     try {
         const response = await axios.post(baseUrl+urlPost,payload);
-        const data = await response.data;
-        return data;
+        const data = await response.data.data; 
+        return {
+            code:data.Status,
+        };
     } catch (error) {
-        console.error(error);
+       const response = error.response;
+       const errors = response.data;
+       return {
+            code:errors.error.code, 
+            msg:errors.error.errorList
+       };
     }
 };
