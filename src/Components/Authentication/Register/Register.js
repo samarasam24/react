@@ -1,6 +1,6 @@
 import { TextField, Button, Container, Typography,Box,Radio,FormLabel, RadioGroup, FormControlLabel } from '@mui/material';
 import { useState } from 'react'; 
-import { authApiPost } from '../../Api/AuthN-AuthR/RegisterApi.js';
+import { adminRegister, authApiPost } from '../../Api/AuthN-AuthR/RegisterApi.js';
 import { useNavigate } from 'react-router-dom';
 
 export function RegisterComponenet() {
@@ -30,10 +30,17 @@ export function RegisterComponenet() {
 
   const handleSubmit = async (e) => {
     e.preventDefault(); 
-    const response = await authApiPost(registerUser); 
+    const response = registerUser.userRole !== 'ADMIN' ? await authApiPost(registerUser) : await adminRegister(
+      {
+        userName:registerUser.userName,
+        email:registerUser.email,
+        mobileNo:registerUser.mobileNo,
+        password:registerUser.password
+      }
+    ); 
 
     if(response.code == 1){
-      navigate('/auth/login');
+      navigate('/auth/login'); 
         setRegisterUser(
           {
             userName:"",

@@ -24,7 +24,7 @@ export function LoginFormComponent(){
     const handleSubmit = async (e) => {
        e.preventDefault(); 
        const response  = await  apiLoginMethod(logData); 
-       if(response.code === '400'){
+       if(response.code === '400'){ 
         alert('Password is Wrong');
        }else{  
 
