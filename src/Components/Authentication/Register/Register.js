@@ -30,14 +30,8 @@ export function RegisterComponenet() {
 
   const handleSubmit = async (e) => {
     e.preventDefault(); 
-    const response = registerUser.userRole !== 'ADMIN' ? await authApiPost(registerUser) : await adminRegister(
-      {
-        userName:registerUser.userName,
-        email:registerUser.email,
-        mobileNo:registerUser.mobileNo,
-        password:registerUser.password
-      }
-    ); 
+    if(registerUser.userName && registerUser.mobileNo && registerUser.email === ''){ return false};
+    const response =  await authApiPost(registerUser);
 
     if(response.code == 1){
       navigate('/auth/login'); 

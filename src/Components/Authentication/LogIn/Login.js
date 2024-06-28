@@ -24,13 +24,18 @@ export function LoginFormComponent(){
     const handleSubmit = async (e) => {
        e.preventDefault(); 
        const response  = await  apiLoginMethod(logData); 
+       
        if(response.code === '400'){ 
         alert('Password is Wrong');
        }else{  
 
         localStorage.setItem('email', response.data.body.userEmail);
         localStorage.setItem('token', response.data.body.jwt);
-        navigate('/auth/user/data');
+        if(response.data.body.role === 'ADMIN'){
+           navigate('/auth/admin/list');
+        }else{
+            navigate('/auth/user/data');
+        };
        };
     };
     return(
