@@ -2,6 +2,9 @@
     cursor: pointer;
     color: rgb(11, 223, 11);
     display: block;
+} 
+#useState:hover{
+    border-top: 1px solid black;  
 }
 #useStateul{  
  display: none;
@@ -21,6 +24,9 @@
     color: rgb(11, 223, 11);
     display: block;
 }
+#useReducer:hover{
+    border-top: 1px solid black;  
+}
 #useReducerul{  
     display: none;
     top: 100%;
@@ -36,6 +42,9 @@
     color: rgb(11, 223, 11);
     display: block;
 }
+#redux:hover{
+    border-top: 1px solid black;
+}
 #reduxul{
     display: none;
     top: 100%;
@@ -43,4 +52,6 @@
     width: 103px;  
     z-index: 3;
 }
- 
+ #loginlink:hover{
+    background-color:rgba(18, 18, 146, 0.87) !important;
+ }

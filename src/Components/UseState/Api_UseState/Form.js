@@ -15,11 +15,34 @@ export function FormApi() {
             userAge:'',
             userAddress:''
     }); 
+    const [ error,setError ] = useState({
+        userName:'',
+        userPassword:'',
+        confirmPassword:'',
+        userEmail:'',
+        phoneNumber:'',
+        userAge:'',
+        userAddress:''
+    }); 
     const handleSubmit = async (e) => {
         e.preventDefault();
        if(editerId.id){
            apiPutMethod(editerId.id,userObj);
        }else{
+            if(userObj.userName===''&&userObj.userEmail === ''&&userObj.userPassword===''&&userObj.userAge===''&&userObj.userAddress===''&&userObj.phoneNumber===''&&userObj.confirmPassword===''){
+                setError(
+                    {
+                        userName:'Name is Required*',
+                        userPassword:'Password is Required*',
+                        confirmPassword:'ConfirmPassword is Required*',
+                        userEmail:'Email is Required*',
+                        phoneNumber:'Phone Number is Required*',
+                        userAge:'Age is Required*',
+                        userAddress:'Address is Required*' 
+                    }
+                );
+                return false;
+            }
            apiPostMethod(userObj) ;
        }
         setUserObj(
@@ -81,8 +104,9 @@ export function FormApi() {
         <>
         <form
         id="apiUseState"
-        className=" position-absolute container-fluid col-7 mx-auto shadow rounded row py-5  gap-2 justify-content-center"
-        onSubmit={handleSubmit}>
+        className="position-absolute container-fluid col-7 mx-auto shadow rounded row py-5  gap-2 justify-content-center"
+        onSubmit={handleSubmit} 
+        style={{zIndex:-1}}>
            
            <div className="d-flex flex-column col-9">
              <h1>UseState-Api</h1>
@@ -95,6 +119,7 @@ export function FormApi() {
                 name="userName"
                 value={userObj.userName}
                 onChange={handleChange} />  
+                <span className="text-danger">{error.userName}</span>
            </div>
            
 
@@ -104,7 +129,8 @@ export function FormApi() {
                 name="userPassword"
                  className="border border-none rounded shadow-sm"
                 value={userObj.userPassword}
-                onChange={handleChange} />   
+                onChange={handleChange} />  
+                 <span className="text-danger">{error.userPassword}</span> 
            </div> 
 
            <div className="d-flex flex-column col-4">
@@ -113,7 +139,8 @@ export function FormApi() {
              name="confirmPassword"
              className="border border-none rounded shadow-sm"
              value={userObj.confirmPassword}
-             onChange={ handleChange} />  
+             onChange={ handleChange} />
+              <span className="text-danger">{error.confirmPassword}</span>  
            </div>
 
            <div className="d-flex flex-column col-5">
@@ -123,6 +150,7 @@ export function FormApi() {
             className="border border-none rounded shadow-sm"
             value={userObj.userEmail}
             onChange={ handleChange} />  
+             <span className="text-danger">{error.userEmail}</span>
            </div>
 
            <div className="d-flex flex-column col-4">
@@ -131,7 +159,8 @@ export function FormApi() {
             className="border border-none rounded shadow-sm"
             name="phoneNumber"
             value={userObj.phoneNumber}
-            onChange={ handleChange} />  
+            onChange={ handleChange} /> 
+             <span className="text-danger">{error.phoneNumber}</span> 
            </div>
 
            <div className="d-flex flex-column col-5">
@@ -141,6 +170,7 @@ export function FormApi() {
              className="border border-none rounded shadow-sm"
             value={userObj.userAge}
             onChange={ handleChange} />  
+             <span className="text-danger">{error.userAge}</span>
            </div>
 
            <div className="d-flex flex-column col-9 px-2 ">
@@ -150,6 +180,7 @@ export function FormApi() {
             className="border border-none rounded shadow-sm"
             value={userObj.userAddress}
             onChange={ handleChange} />  
+             <span className="text-danger">{error.userAddress}</span>
            </div>
                         
             <div className="col-9 d-flex flex-column">
