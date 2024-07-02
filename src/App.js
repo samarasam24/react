@@ -3,8 +3,7 @@ import { FormApi } from './Components/UseState/Api_UseState/Form.js';
 import { TableApi} from './Components/UseState/Api_UseState/Table.js';
 import { NonApiForm } from './Components/UseState/Normal_UseState/Form.js';
 import { NonApiTable } from './Components/UseState/Normal_UseState/Table.js';
-import './App.css'
-import { Navbar } from './Components/Navbar/Navbar.js';
+import './App.css' 
 import { useReducer, useState } from 'react';
 import { UseReducerAPi } from './Components/UseReducer/Api_UseReducer/Form.js';
 import { UseReducerNonAPi } from './Components/UseReducer/Normal_UseReducer/Form.js'; 
@@ -21,6 +20,7 @@ import { RegisterComponenet } from './Components/Authentication/Register/Registe
 import {LoginFormComponent} from './Components/Authentication/Login/Login.js'; 
 import { UserTableComponent } from './Components/Authorization/User/UserTable.js';
 import { AdminTable } from './Components/Authorization/Admin/AdminTable.js';
+import {ResponsiveDrawer} from './Components/Sidebar/Sidebar.js';
 function App() {
 
   //Normal-UseState
@@ -62,8 +62,8 @@ function App() {
   
   return (   
     
-    <BrowserRouter>
-       <Navbar/>
+    <BrowserRouter> 
+       <ResponsiveDrawer/>
       <Routes>
             <Route path="/" element={<Navigate to={'/form'}/>}/>
             <Route path='/form' element={<FormApi/>}/>

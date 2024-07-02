@@ -1,32 +1,31 @@
-import { Container,Typography,TextField,Button,Box } from "@mui/material";
-import { useState } from 'react';
+import { Container,Typography,TextField,Button,Box } from "@mui/material"; 
 import { apiLoginMethod } from "../../Api/AuthN-AuthR/LoginApi";
 import { useNavigate } from "react-router-dom";
+import { useFormik } from "formik";
+import * as Yup  from 'yup';
 
 export function LoginFormComponent(){
 
     const navigate = useNavigate();
-    const [ logData,setLogdata ] = useState(
-        {
+     
+    const initialValues = {
             email:'',
             password:''
+         }; 
+    const validationSchema = Yup.object(
+        {
+            email:Yup.string().required('Email is required*'),
+            password:Yup.string().required('Password is required*')
         }
     );
-    const handleChange = (e) => {
-        const { name,value } = e.target;
-        setLogdata(
-            {
-                ...logData,
-                [name]:value
-            }
-        );
-    }; 
-    const handleSubmit = async (e) => {
-       e.preventDefault(); 
-       const response  = await  apiLoginMethod(logData); 
+    const handleSubmit = async (value,{setErrors}) => { 
+       const response  = await  apiLoginMethod(value); 
        
        if(response.code === '400'){ 
-        alert('Password is Wrong');
+        const error = {};
+         if(response.message ==='Usernot found.!') error.email='User not found*';
+         if(response.message === 'Password is wrong') error.password = 'Password is incorrect*';
+         setErrors(error);
        }else{  
 
         localStorage.setItem('email', response.data.body.userEmail);
@@ -38,6 +37,13 @@ export function LoginFormComponent(){
         };
        };
     };
+    const formik = useFormik(
+        {
+            initialValues,
+            onSubmit:handleSubmit,
+            validationSchema
+        }
+    );
     return(
         <Container 
         sx={
@@ -49,7 +55,7 @@ export function LoginFormComponent(){
             }
         }
         >
-            <form className='d-flex row gap-3 rounded shadow p-5 ' onSubmit={handleSubmit}>
+            <form className='d-flex row gap-3 rounded shadow p-5 ' onSubmit={formik.handleSubmit}>
                 <Typography component='h5' variant='h5'>Log In</Typography>
                 <Box display={'flex'} flexDirection={'column'} >
                     <Typography> Email: </Typography>
@@ -57,8 +63,11 @@ export function LoginFormComponent(){
                     variant="outlined" 
                     size='small'
                     name='email'
-                    value={logData.email}
-                    onChange={handleChange}/>
+                    value={formik.values.email}
+                    onBlur={formik.handleBlur}
+                    onChange={formik.handleChange}
+                    error={formik.touched.email && formik.errors.email ? true:false}
+                    helperText={formik.touched.email && formik.errors.email}/>
                 </Box>
                <Box display={'flex'} flexDirection={'column'}>
                     <Typography> Password: </Typography>
@@ -66,8 +75,11 @@ export function LoginFormComponent(){
                     variant="outlined" 
                     size='small'
                     name='password'
-                    value={logData.password}
-                    onChange={handleChange}/>
+                    value={formik.values.password}
+                    onBlur={formik.handleBlur}
+                    onChange={formik.handleChange}
+                    error={formik.touched.password && formik.errors.password ? true:false}
+                    helperText={formik.touched.password && formik.errors.password}/>
                </Box>
                 <Box display={'flex'} justifyContent={'end'}>
                     <Button 

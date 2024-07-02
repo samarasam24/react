@@ -25,6 +25,7 @@ export const UserTableComponent = () => {
     const token = localStorage.getItem('token'); 
 
     async function fetchUser(payload,token){ 
+        console.log(payload,token);
         const response = await getUserMethod(payload,token);  
         const {Authorities,Details,} = response;  
         

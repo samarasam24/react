@@ -37,11 +37,14 @@ export function RegisterComponenet() {
     
     if(response.Status === 1){
       navigate('/auth/login');  
-    }else if(response.error.code === '400 BAD_REQUEST'){    
+    }else if(response.error.code === '400 BAD_REQUEST'){ 
+      const apiError = {};   
         response.error.errorList.forEach( value => {
-          if (value==="Error: Duplicate entry {0} for key 'user email'") setErrors({email:'This email is already registered*'});
-          if (value===" Duplicate phone number") setErrors({mobileNo:'This number is already registered'});
+          if (value==="Error: Duplicate entry {0} for key 'user email'") apiError.email='This email is already registered*';
+          if (value===" Duplicate phone number") apiError.mobileNo='This number is already registered';
+          if (value==="role is not applicable") apiError.userRole='Admin is already registered';
         });
+        setErrors(apiError);
     }   
 
   }; 
