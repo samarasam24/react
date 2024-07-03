@@ -1,4 +1,4 @@
-import { BrowserRouter, Route, Routes,Navigate } from 'react-router-dom';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { FormApi } from './Components/UseState/Api_UseState/Form.js';
 import { TableApi} from './Components/UseState/Api_UseState/Table.js';
 import { NonApiForm } from './Components/UseState/Normal_UseState/Form.js';
@@ -21,6 +21,9 @@ import {LoginFormComponent} from './Components/Authentication/Login/Login.js';
 import { UserTableComponent } from './Components/Authorization/User/UserTable.js';
 import { AdminTable } from './Components/Authorization/Admin/AdminTable.js';
 import {ResponsiveDrawer} from './Components/Sidebar/Sidebar.js';
+import { MaterialApp } from './Example/MaterialUi.js';
+import { HomePage } from './Components/Home/Home.js';
+import { Footer } from './Components/Footer/Footer.js';
 function App() {
 
   //Normal-UseState
@@ -63,9 +66,10 @@ function App() {
   return (   
     
     <BrowserRouter> 
-       <ResponsiveDrawer/>
+       <MaterialApp/>
+       {/* <ResponsiveDrawer/> */}
       <Routes>
-            <Route path="/" element={<Navigate to={'/form'}/>}/>
+            <Route path="/" element={<HomePage/>}/>
             <Route path='/form' element={<FormApi/>}/>
             <Route path="/table" element={<TableApi/>}/>
             <Route path="/form/:id" element={<FormApi/>}/>
@@ -98,8 +102,9 @@ function App() {
             <Route path='/auth/register' element={<RegisterComponenet/>}/>  
             <Route path='/auth/login' element={<LoginFormComponent/>}/> 
             <Route path='/auth/user/data' element={<UserTableComponent/>}/>
-            <Route path='/auth/admin/list' element={<AdminTable/>}/>
+            <Route path='/auth/admin/list' element={<AdminTable/>}/> 
       </Routes>
+      <Footer/>
     </BrowserRouter>
   );
 };

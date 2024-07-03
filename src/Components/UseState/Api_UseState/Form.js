@@ -104,7 +104,7 @@ export function FormApi() {
         <>
         <form
         id="apiUseState"
-        className="position-absolute container-fluid col-7 mx-auto shadow rounded row py-5  gap-2 justify-content-center"
+        className="position-absolute container-fluid col-6 mx-auto shadow rounded row py-5 bg-white gap-2 justify-content-center"
         onSubmit={handleSubmit} 
         style={{zIndex:-1}}>
            
