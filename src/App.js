@@ -20,10 +20,11 @@ import { RegisterComponenet } from './Components/Authentication/Register/Registe
 import {LoginFormComponent} from './Components/Authentication/Login/Login.js'; 
 import { UserTableComponent } from './Components/Authorization/User/UserTable.js';
 import { AdminTable } from './Components/Authorization/Admin/AdminTable.js';
-import {ResponsiveDrawer} from './Components/Sidebar/Sidebar.js';
+// import {ResponsiveDrawer} from './Components/Sidebar/Sidebar.js';
 import { MaterialApp } from './Example/MaterialUi.js';
 import { HomePage } from './Components/Home/Home.js';
-import { Footer } from './Components/Footer/Footer.js';
+import ResponsiveForm from './Example/ExForm.js';
+// import { Footer } from './Components/Footer/Footer.js';
 function App() {
 
   //Normal-UseState
@@ -103,8 +104,9 @@ function App() {
             <Route path='/auth/login' element={<LoginFormComponent/>}/> 
             <Route path='/auth/user/data' element={<UserTableComponent/>}/>
             <Route path='/auth/admin/list' element={<AdminTable/>}/> 
+            <Route path='/exform' element={<ResponsiveForm/>}/>
       </Routes>
-      <Footer/>
+      {/* <Footer/> */}
     </BrowserRouter>
   );
 };
