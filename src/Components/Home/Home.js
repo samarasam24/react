@@ -4,7 +4,7 @@ import { styled } from "@mui/material/styles";
 export const HomePage = () => {
 const CustomizedBox = styled(Box)
 `
-  background-color:#1d3144;
+//   background-color:#1d3144;
   height:100vh;
   color:#d8aa26;
   font-weight:900; 
@@ -12,7 +12,7 @@ const CustomizedBox = styled(Box)
 `;
     return(
         <>
-        <CustomizedBox>
+        {/* <CustomizedBox>
             <Typography>
                 React Learnings...
             </Typography>
@@ -22,7 +22,7 @@ const CustomizedBox = styled(Box)
             </Typography>
             <Button>Register</Button>
             </Box>
-        </CustomizedBox>
+        </CustomizedBox> */}
         </>
     );
 };

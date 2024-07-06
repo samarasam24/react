@@ -21,15 +21,16 @@ import {LoginFormComponent} from './Components/Authentication/Login/Login.js';
 import { UserTableComponent } from './Components/Authorization/User/UserTable.js';
 import { AdminTable } from './Components/Authorization/Admin/AdminTable.js';
 // import {ResponsiveDrawer} from './Components/Sidebar/Sidebar.js';
-import { MaterialApp } from './Example/MaterialUi.js';
+// import { MaterialApp } from './Example/MaterialUi.js';
 import { HomePage } from './Components/Home/Home.js';
-import ResponsiveForm from './Example/ExForm.js';
+import ResponsiveForm from './Example/ExForm.js';  
+import { Navbar } from './Components/Navbar/Navbar.js';
 // import { Footer } from './Components/Footer/Footer.js';
 function App() {
 
   //Normal-UseState
   const [allUserData,setAllUserData] = useState([]);
-  const [editId,setEditId] = useState(null); 
+  const [editId,setEditId] = useState(null);  
 
   const addOrEdit = (data) => {
     if(editId !== null){
@@ -67,8 +68,9 @@ function App() {
   return (   
     
     <BrowserRouter> 
-       <MaterialApp/>
+       {/* <MaterialApp/> */}
        {/* <ResponsiveDrawer/> */}
+       <Navbar/>
       <Routes>
             <Route path="/" element={<HomePage/>}/>
             <Route path='/form' element={<FormApi/>}/>
